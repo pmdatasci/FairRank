@@ -1,0 +1,64 @@
+<h1>Usage of optimization and runOptimization</h1>
+<h3>Import all functions in runOptimization</h3>
+<ul>
+<li>runOptimization provide the all the functions of optimization and interface to run optimization</li>
+</ul>
+<pre><code class="language-python">from runOptimization import *
+</code></pre>
+<h4>Initialization</h4>
+<h5>Step 1: Specify a input data stored in csv file</h5>
+<pre><code class="language-python">fn = &quot;GermanCredit_Age35.csv&quot; 
+</code></pre>
+<h5>Step 2: Specify the target attribute to rank on</h5>
+<ul>
+<li>If specify target attribute as col(fn)-1, it will generate a score for each user by summing all attributes with equally weight to rank on. col(fn) is the number of attributes in the input data.</li>
+<li>Target attribute can be value from [0,col(fn)-1] while col(fn)-1 represents using weighted summation score as target attribute</li>
+</ul>
+<pre><code class="language-python">target_att = 6 
+</code></pre>
+<h5>Step 3: Specify which value of sentitive attribute represents the protected group</h5>
+<pre><code class="language-python">sensi_att = 1
+</code></pre>
+<h5>Step 4: Specify size of K</h5>
+<ul>
+<li>K represents size of intermediate layer in optimization neural network. Higher K represents more accurate prediction. Also takes more time to converge.</li>
+</ul>
+<pre><code class="language-python">opt_k = 4
+</code></pre>
+<h5>Step 5: Choose the accuracy measure will be used in the optimization process</h5>
+<ul>
+<li>Choose from [&quot;scoreDiff&quot;, &quot;positionDiff&quot;, &quot;kendallDis&quot;, &quot;spearmanDis&quot;, &quot;pearsonDis&quot;].</li>
+<li>scoreDiff represents the score difference between two rankings.</li>
+<li>positionDiff represents the rank position difference between two rankings.</li>
+<li>kendallDis represents the kendall distance between two rankings.</li>
+<li>spearmanDis represents spearman correlation between two rankings. Only used the correlation and ignore the p-value in this case.</li>
+<li>pearsonDis represents pearson correlation between two rankings. Only used the correlation and ignore the p-value in this case.</li>
+</ul>
+<pre><code class="language-python">acc_measure = &quot;scoreDiff&quot;
+</code></pre>
+<h5>Step 6: Set the cut point at where to compute the fairness measure</h5>
+<pre><code class="language-python">cut_point = 10
+</code></pre>
+<h5>Step 7: Specify the file to output optimization results</h5>
+<pre><code class="language-python">out_fn = &quot;testOptimization.csv&quot;
+</code></pre>
+<h4>Test optimization process using above setting</h4>
+<pre><code class="language-python">main(fn, target_att, sensi_att, opt_k, acc_measure, cut_point, out_fn)
+print &quot;Finished optimization&quot;
+print &quot;OPT result stores in &quot;+ out_fn
+</code></pre>
+<pre><code>Finished reading csv!
+Finished fairness normalizer calculation!
+Starting optimization @  4 ACCM  scoreDiff  time:  1485470812.1
+(250, 1.0368499278231544)
+(500, 0.54193378842745721)
+(750, 0.42883044927988201)
+(1000, 0.21465836597579119)
+(1250, 0.20320949600353819)
+(1500, 0.20011416240307803)
+(1750, 0.19853254631944087)
+Ending optimization @  4 ACCM  scoreDiff  time:  1485470993.81
+Finished optimization
+OPT result stores in testOptimization.csv
+</code></pre>
+

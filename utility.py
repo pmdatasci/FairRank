@@ -36,9 +36,9 @@ def transformCSVdata(_data_fn,_target_cols, _sensi_bound):
         print("Cannot find the csv file")
 
 
-    if not isinstance( _target_cols, ( int, long ) ):
+    if not isinstance( _target_cols, ( int ) ):
         raise TypeError("Input target column must be an integer value from [0, col(data)-2], data is the input data in file _data_fn")
-    if not isinstance( _sensi_bound, ( int, long ) ):
+    if not isinstance( _sensi_bound, ( int ) ):
         raise TypeError("Input value of sensitive attribute must be an integer value can be 0 or 1")
     
     if len(dat) == 0:

@@ -32,7 +32,7 @@ def calculateEvaluateRez(_rez,_data,_inputscores,_k,_accmeasure):
         raise TypeError("Input parameter list must be a list-wise structure defined by '[]' symbol")
     if not isinstance(_inputscores, (list, tuple, np.ndarray)) and not isinstance( _inputscores, basestring ):
         raise TypeError("Input score list must be a list-wise structure defined by '[]' symbol")
-    if not isinstance( _k, ( int, long ) ):
+    if not isinstance( _k, ( int ) ):
         raise TypeError("Input k must be an integer")
     if not isinstance( _accmeasure, str ):
         raise TypeError("Input accuracy measure must be a string that choose from ['scoreDiff', 'positionDiff', 'kendallDis', 'spearmanDis', 'pearsonDis'] defined in the begining of this file")
@@ -231,7 +231,7 @@ def lbfgsOptimize(_params, _data, _pro_data, _unpro_data,
     # error handling for input type
     if not isinstance(_inputscores, (list, tuple, np.ndarray)) and not isinstance( _inputscores, basestring ):
         raise TypeError("Input score list must be a list-wise structure defined by '[]' symbol")
-    if not isinstance( _k, ( int, long ) ):
+    if not isinstance( _k, ( int ) ):
         raise TypeError("Input k must be an integer")
     if not isinstance( _accmeasure, str ):
         raise TypeError("Input accuracy measure must be a string that choose from ['scoreDiff', 'positionDiff', 'kendallDis', 'spearmanDis', 'pearsonDis'] defined in the begining of this file")
@@ -313,7 +313,7 @@ def initOptimization(_data,_k):
     user_N,att_N=_data.shape
 
     # error handling for input type    
-    if not isinstance( _k, ( int, long ) ):
+    if not isinstance( _k, ( int ) ):
         raise TypeError("Input k must be an integer")
 
     # error handling for input value

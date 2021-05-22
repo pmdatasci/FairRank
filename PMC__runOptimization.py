@@ -57,7 +57,7 @@ def main(_csv_fn,_target_col,_sensi_bound,_k,_accmeasure,_cut_point,_rez_fn):
     max_rND=measures.getNormalizer(user_N,pro_N,ND_DIFFERENCE)
     max_rRD=measures.getNormalizer(user_N,pro_N,RD_DIFFERENCE)    
     
-    print "Finished fairness normalizer calculation!"
+    print ("Finished fairness normalizer calculation!")
     input_ranking=sorted(range(len(input_scores)), key=lambda k: input_scores[k],reverse=True)
 
     input_rKL=measures.calculateNDFairness(input_ranking,pro_index,_cut_point,KL_DIVERGENCE,max_rKL)
@@ -67,7 +67,7 @@ def main(_csv_fn,_target_col,_sensi_bound,_k,_accmeasure,_cut_point,_rez_fn):
 
     # record the start time of optimization
     start_time = time.time()
-    print "Starting optimization @ ",_k,"ACCM ",_accmeasure," time: ", start_time
+    print ("Starting optimization @ ",_k,"ACCM ",_accmeasure," time: ", start_time)
 
     # initialize the optimization
     rez,bnd=optimization.initOptimization(data,_k) 
@@ -77,7 +77,7 @@ def main(_csv_fn,_target_col,_sensi_bound,_k,_accmeasure,_cut_point,_rez_fn):
                    args=(data, pro_data, unpro_data, input_scores, _accmeasure, _k, 0.01,
                          1, 100, 0), bounds = bnd,approx_grad=True, factr=1e12, pgtol=1e-04,maxfun=15000, maxiter=15000)
     end_time = time.time()
-    print "Ending optimization @ ",_k,"ACCM ",_accmeasure," time: ", end_time
+    print ("Ending optimization @ ",_k,"ACCM ",_accmeasure," time: ", end_time)
     # evaluation after converged
     estimate_scores,acc_value=optimization.calculateEvaluateRez(rez,data,input_scores,_k,_accmeasure)
     estimate_ranking=sorted(range(len(estimate_scores)), key=lambda k: estimate_scores[k],reverse=True)

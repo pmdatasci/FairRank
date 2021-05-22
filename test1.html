@@ -1,0 +1,92 @@
+<h1>Usage of measures</h1>
+<h3>Import all functions in measures</h3>
+<p>from measures import *
+import numpy as np</p>
+<h4>Initialization</h4>
+<h6>Specify some constant used in measures</h6>
+<h1>- KL_DIVERGENCE represents kl-divergence difference fairness measure</h1>
+<h1>- ND_DIFFERENCE represents normalized difference fairness measure</h1>
+<h1>- RD_DIFFERENCE represents ratio difference fairness measure</h1>
+<p>KL_DIVERGENCE = &quot;rKL&quot;
+ND_DIFFERENCE = &quot;rND&quot;
+RD_DIFFERENCE = &quot;rRD&quot;</p>
+<h5>Step 1: Specify the input population with size of user and protected group</h5>
+<p>user_N = 100
+pro_N = 50</p>
+<h5>Step 2: Compute the normalizor of above input population</h5>
+<h1>normalized fairness follow here</h1>
+<h1>if this input population has been computed, then get from recorded maximum (stored in normalizer.txt)</h1>
+<h1>else compute the normalizer of input population</h1>
+<p>max_rKL = getNormalizer(user_N,pro_N,KL_DIVERGENCE)<br />
+max_rND = getNormalizer(user_N,pro_N,ND_DIFFERENCE)
+max_rRD = getNormalizer(user_N,pro_N,RD_DIFFERENCE)</p>
+<pre><code># Initialized a dataset description generator.
+</code></pre>
+<h6>if want to skip the normalizor computation, execute the following cell.</h6>
+<pre><code class="language-python"># non-normalized fairness follow here 
+max_rKL = 1
+max_rND = 1exit
+max_rRD = 1
+</code></pre>
+<h5>Step 3: Define the cut point of computation of fairness measures</h5>
+<pre><code class="language-python">cut_point = 10
+</code></pre>
+<h4>Test three fairness meaures</h4>
+<h5>Step 1: Generate a test ranking and related position of protected group</h5>
+<pre><code class="language-python">test_ranking = [x for x in range(user_N)]
+pro_index = [x for x in range(pro_N)]
+</code></pre>
+<h5>Step 2: Compute three fairness measures for above test ranking</h5>
+<pre><code class="language-python">fair_rKL = calculateNDFairness(test_ranking,pro_index,cut_point,KL_DIVERGENCE,max_rKL)
+fair_rND = calculateNDFairness(test_ranking,pro_index,cut_point,ND_DIFFERENCE,max_rND)
+fair_rRD = calculateNDFairness(test_ranking,pro_index,cut_point,RD_DIFFERENCE,max_rRD)
+
+print &quot;rKL of test ranking is &quot;, str(fair_rKL)
+print &quot;rND of test ranking is &quot;, str(fair_rND)
+print &quot;rKL of test ranking is &quot;, str(fair_rRD)
+</code></pre>
+<pre><code>rKL of test ranking is  1.15901724032
+rND of test ranking is  0.660066334446
+rKL of test ranking is  1.08152800722
+</code></pre>
+<h4>Test five accuracy meaures</h4>
+<h5>Step 1: Generate a test score list and a ground truth score list</h5>
+<pre><code class="language-python">ground_truth_scores = list(np.random.permutation(user_N))
+estimate_scores = list(np.random.permutation(user_N))
+</code></pre>
+<h5>Step 2: Rank the above score lists for accuracy computation</h5>
+<pre><code class="language-python"># generate permutations of two score lists returned permutation of sorted id 
+per_scores_input=sorted(range(len(ground_truth_scores)), key=lambda k: ground_truth_scores[k],reverse=True)
+per_scores_hat=sorted(range(len(estimate_scores)), key=lambda k: estimate_scores[k],reverse=True)
+# sort two scores list in descending order for computing score difference
+sorted_score_hat = estimate_scores   
+sorted_score_hat.sort(reverse=True)
+sorted_inputscores = ground_truth_scores   
+sorted_inputscores.sort(reverse=True)
+</code></pre>
+<h5>Step 3: Compute the five accuracy measures for above ranked score lists</h5>
+<pre><code class="language-python"># score difference   
+acc_scoreDiff = calculateScoreDifference(sorted_score_hat,sorted_inputscores) 
+# position difference     
+acc_posDiff = calculatePositionDifference(per_scores_hat,per_scores_input) 
+# kendall distance   
+acc_kendallDis = calculateKendallDistance(per_scores_hat,per_scores_input)      
+# for spearman and pearson relation, use the negative value to minimize during optimization
+# spearman distance  
+acc_spearmanDis = calculateSpearmanR(estimate_scores,ground_truth_scores) 
+# pearson correlation 
+acc_pearsonDis = calculatePearsonC(estimate_scores,ground_truth_scores)
+
+print &quot;score difference between input two scores lists is &quot;, str(acc_scoreDiff)
+print &quot;position difference between input two permutations is &quot;, str(acc_posDiff)
+print &quot;kendall distance between input two permutations is &quot;, str(acc_kendallDis)
+print &quot;spearman distance between input two scores lists is &quot;, str(acc_spearmanDis)
+print &quot;pearson correlation between input two scores lists is &quot;, str(acc_pearsonDis)
+</code></pre>
+<pre><code>score difference between input two scores lists is  0.0
+position difference between input two permutations is  0.698
+kendall distance between input two permutations is  0.530101010101
+spearman distance between input two scores lists is  1.0
+pearson correlation between input two scores lists is  1.0
+</code></pre>
+

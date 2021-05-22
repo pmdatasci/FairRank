@@ -74,8 +74,8 @@ out_fn = "testOptimization.csv"
 
 ```python
 main(fn, target_att, sensi_att, opt_k, acc_measure, cut_point, out_fn)
-print "Finished optimization"
-print "OPT result stores in "+ out_fn
+print ("Finished optimization")
+print ("OPT result stores in "+ out_fn)
 ```
 
     Finished reading csv!

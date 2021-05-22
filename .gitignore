@@ -1,0 +1,7 @@
+env
+.vscode
+datasets
+PMCData
+PMCoutput
+*.pyc
+.DS_Store

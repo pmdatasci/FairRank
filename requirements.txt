@@ -1,0 +1,7 @@
+setuptools==49.2.1
+numba
+llvmlite
+numpy==1.20.2
+scipy==1.6.3
+pandas
+matplotlib

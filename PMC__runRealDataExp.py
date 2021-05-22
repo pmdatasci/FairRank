@@ -85,8 +85,8 @@ def main(_data_folder,_rez_fn,_sensi_bound):
 
     # define the mapping dictionary of cut point
     cutpoint_dic={}
-    cutpoint_dic['ProPublica']=10
-    cutpoint_dic['GermanCredit']=10
+    cutpoint_dic['ProPublica']=20
+    cutpoint_dic['GermanCredit']=20
 
 
     rez_fn=_rez_fn+".csv"
@@ -104,7 +104,7 @@ def main(_data_folder,_rez_fn,_sensi_bound):
             except EnvironmentError:
                 print("Cannot find "+current_fn)
             
-            print "Finishing computation of data: "+di+"_"+si
+            print ("Finishing computation of data: "+di+"_"+si)
             reverse_atts=reverse_atts_dic[di+","+si]
             noweight_atts=[si]
             # get the target columns
@@ -122,4 +122,5 @@ def main(_data_folder,_rez_fn,_sensi_bound):
 
 
 if __name__ == "__main__":
-    main()
+    # main()
+    main('./datasets' ,'./PMCdata/mytest_file30' ,0)

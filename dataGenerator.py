@@ -18,7 +18,7 @@ def generateUnfairRanking(_ranking,_protected_group,_fairness_probability):
     # error handling for ranking and protected group
     completeCheckRankingProperties(_ranking,_protected_group)
 
-    if not isinstance( _fairness_probability, ( int, long, float, complex ) ):
+    if not isinstance( _fairness_probability, ( int, float, complex ) ):
         raise TypeError("Input fairness probability must be a number")
     # error handling for value
     if _fairness_probability > 1 or _fairness_probability < 0:
@@ -46,7 +46,7 @@ def generateUnfairRanking(_ranking,_protected_group,_fairness_probability):
         unfair_ranking=unfair_ranking+pro_ranking
         
     if len(unfair_ranking)<len(_ranking): # check error for insertation
-        print "Error!"
+        print ("Error!")
     return unfair_ranking
     
 # Function for error handling

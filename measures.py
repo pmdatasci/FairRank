@@ -13,7 +13,7 @@ RD_DIFFERENCE="rRD" # represent ratio difference group fairness measure
 LOG_BASE=2 # log base used in logorithm function
 
 NORM_CUTPOINT=10 # cut-off point used in normalizer computation
-NORM_ITERATION=10 # max iterations used in normalizer computation
+NORM_ITERATION=10 # max iterations used in normalizer computatiopi install numpyn
 NORM_FILE="normalizer.txt" # externally text file for normalizers
 
 
@@ -37,9 +37,9 @@ def calculateNDFairness(_ranking,_protected_group,_cut_point,_gf_measure,_normal
     # error handling for ranking and protected group
     dataGenerator.completeCheckRankingProperties(_ranking,_protected_group)
     # error handling for input type 
-    if not isinstance( _cut_point, ( int, long ) ):
+    if not isinstance( _cut_point, ( int ) ):
         raise TypeError("Input batch size must be an integer larger than 0")
-    if not isinstance( _normalizer, (int, long, float, complex) ):
+    if not isinstance( _normalizer, (int, float, complex) ):
         raise TypeError("Input normalizer must be a number larger than 0")
     if not isinstance( _gf_measure, str ):
         raise TypeError("Input group fairness measure must be a string that choose from ['rKL', 'rND', 'rRD']")
@@ -178,9 +178,9 @@ def getNormalizer(_user_N,_pro_N,_gf_measure):
     normalizer_dic=readNormalizerDictionary()
 
     # error handling for type  
-    if not isinstance( _user_N, ( int, long ) ):
+    if not isinstance( _user_N, ( int ) ):
         raise TypeError("Input user number must be an integer")
-    if not isinstance( _pro_N, ( int, long ) ):
+    if not isinstance( _pro_N, ( int  ) ):
         raise TypeError("Input size of protected group must be an integer")
     if not isinstance( _gf_measure, str ):
         raise TypeError("Input group fairness measure must be a string that choose from ['rKL', 'rND', 'rRD']")
